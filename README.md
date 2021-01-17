@@ -1,5 +1,5 @@
 # ARMA Model with Rolling Prediction Validation
-The program uses the yfinance module to download financial data, pandas and numpy to manage dataframes, and the statsmodels library for ARMA modelling.
+The program uses the yfinance module to download financial data, pandas and numpy to manage dataframes, and the statsmodels library for ARMA modelling. ARCH is imported for future plans to include volatility modelling.
 
 ## Data Preprocessing
 
@@ -8,9 +8,9 @@ Log returns are calculated from adjusted close price. Logs are useful for price 
 ## ARMA Construction
 ARMA models, autoregressive moving average models, at least the model described here, use no outside information to predict the price. The model uses only the past price information to try and predict future prices.
 
-ARMA(1,1) is used as the default for this model currently, as computing the optimal orders according to AIC or BIC is very computationally expensive relative to performance gains over many companies. 
+ARMA(1,1) is used as the default for this model currently, as computing the optimal orders according to AIC and BIC is very computationally expensive relative to performance gains over many companies. 
 
-Statsmodels ARIMA is the library used the I stands for integrated. As the program uses log returned data we set the integration order to 0, (1,0,1) in the program.
+Statsmodels ARIMA is the model used for this program. The I stands for integrated. As the program uses log returned data we set the integration order to 0, (1,0,1) in the program.
 
 ## Cross-Validation
 
