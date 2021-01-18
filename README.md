@@ -8,9 +8,9 @@ Log returns are calculated from adjusted close price. Logs are useful for price 
 ## ARMA Construction
 ARMA models, autoregressive moving average models, at least the model described here, use no outside information to predict the price. The model uses only the past price information to try and predict future prices.
 
-ARMA(1,1) is used as the default for this model currently, as computing the optimal orders according to AIC and BIC is very computationally expensive relative to performance gains over many companies. 
+Use statsmodels ARMA order select and the Bayesian Information criteria to calculate the optimal ARMA order between 4 auto regressive processes and 2 moving average processes. Calculating this value is reasonably computationally expensive ~3 seconds for 3 years of data points. 
 
-Statsmodels ARIMA is the model used for this program. The I stands for integrated. As the program uses log returned data we set the integration order to 0, (1,0,1) in the program.
+Statsmodels ARIMA is the model used for this program. The I stands for integrated. As the program uses log returned data we set the integration order to 0. Where the ARMA order is specified as (p,d,q) where p is AR components, d is integrated components and q is moving average processes, all models are of the form (p,0,q).
 
 ## Cross-Validation
 
@@ -27,7 +27,7 @@ Add or remove any company ticker you desire to the companies list at the bottom,
 
 The for loop range under ARMA_modelling, the range length can be changed for more validation instances. Currently set at 0.3 or 30%. Under the class constructor the share price history can be made shorter or longer. 
 
-The ARMA order can also be altered, but as the program estimates potentially hundreds of models per company it is best to keep the order low, (0,0) is always interesting.
+A strong argument can be made that the ARMA order should be fixed to (0,0,0) or (1,0,1) for fast computing speed if 10s or hundreds of companies want to be analysed as both calculating the optimal order takes additional time, and every additional AR and MA order increases runtime by a significant margin.
 
 ## Conclusions
 The ARMA model can be very powerful but its utility especially arises when combined with other financial models that complement the ARMA's weaknesses, namely models that use outside information such as share volume or price to earnings ratio.
